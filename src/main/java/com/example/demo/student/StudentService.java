@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
+// is a Spring annotation used to mark a class as a service component. It tells the Spring
+// container to create an instance of this class and manage its lifecycle
 import org.springframework.stereotype.Service;
 
 @Service
