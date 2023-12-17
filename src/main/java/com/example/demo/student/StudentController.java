@@ -18,7 +18,8 @@ public class StudentController {
 
 	private final StudentService studentService;
 	
-	@Autowired
+	@Autowired // we saying studentService should be auto wired for us
+	// so studenetService magically instantiated for us and injected to this constructor
     public StudentController(StudentService studentService) {
 		this.studentService = studentService;
 	}
