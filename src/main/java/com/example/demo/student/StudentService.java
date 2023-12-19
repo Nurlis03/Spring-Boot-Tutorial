@@ -1,6 +1,8 @@
 package com.example.demo.student;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 // is a Spring annotation used to mark a class as a service component. It tells the Spring
 // container to create an instance of this class and manage its lifecycle
@@ -21,6 +23,13 @@ public class StudentService {
 	}
 
 	public void addNewStudent(Student student) {
+		Optional<Student> studentOptional = studentRepository
+				.findStudentByEmail(student.getEmail());
+		if (studentOptional.isPresent()) {
+			throw new IllegalStateException("emai taken");
+		}
+		
+		studentRepository.save(student);
 		System.out.println(student);
 	}
 }
