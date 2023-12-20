@@ -13,7 +13,7 @@ public class StudentService {
 
 	private final StudentRepository studentRepository;
 
-	
+	@Autowired
 	public StudentService(StudentRepository studentRepository) {
 		this.studentRepository = studentRepository;
 	}
@@ -26,10 +26,19 @@ public class StudentService {
 		Optional<Student> studentOptional = studentRepository
 				.findStudentByEmail(student.getEmail());
 		if (studentOptional.isPresent()) {
-			throw new IllegalStateException("emai taken");
+			throw new IllegalStateException("email taken");
 		}
 		
 		studentRepository.save(student);
 		System.out.println(student);
+	}
+
+	public void deleteStudent(Long studentId) {
+		boolean exists = studentRepository.existsById(studentId);
+		if (!exists) {
+			throw new IllegalStateException(
+				"student with id " + studentId + " does not exists");
+		}
+		studentRepository.deleteById(studentId);
 	}
 }
